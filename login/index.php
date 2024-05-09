@@ -2,6 +2,16 @@
 // เรียกใช้คลาส UserDatabase จากไฟล์ config.php
 require_once 'config.php';
 
+// สร้างอ็อบเจกต์ของคลาส UserDatabase
+$userDb = new UserDatabase();
+
+// เรียกใช้เมธอด isUserLoggedIn() เพื่อตรวจสอบสถานะการล็อกอินของผู้ใช้
+if ($userDb->isUserLoggedIn()) {
+    // ถ้าผู้ใช้ล็อกอินอยู่แล้ว ให้เปลี่ยนเส้นทางไปยังหน้าหลักของผู้ใช้
+    header("Location: ../member/index.php");
+    exit;
+}
+
 // ตรวจสอบว่ามีการส่งค่าผ่านแบบ POST หรือไม่
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // รับค่าที่ส่งมาจากฟอร์ม
@@ -9,11 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     try {
-        // สร้างอ็อบเจกต์ของคลาส UserDatabase
-        $UserberDb = new UserDatabase();
-
         // เรียกใช้เมธอด loginUser เพื่อตรวจสอบข้อมูลผู้ใช้
-        $UserberDb->loginUser($username, $password);
+        $userDb->loginUser($username, $password);
     } catch (Exception $e) {
         // หากเกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล
         // จะแสดงข้อความของข้อผิดพลาด

@@ -1,4 +1,5 @@
 <?php
+// forgot_password.php
 // เรียกใช้คลาส UserDatabase จากไฟล์ config.php
 require_once 'config.php';
 
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="container">
-    <form class="form-signin" method="POST" action="reset_password.php">
+    <form class="form-signin" method="POST" action="">
         <h1 class="h3 mb-3 fw-normal">Forgot Password</h1>
 
         <?php
@@ -54,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="email">Email address</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Reset Password</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">ค้นหาในระบบ</button>
 
         <div class="text-center mt-3">
             <p>Remember your password? <a href="index.php">Sign in</a></p>

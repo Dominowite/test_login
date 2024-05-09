@@ -19,7 +19,7 @@
           <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./login/index.php">
+          <a class="nav-link" href="../login/index.php">
             <i class="fa fa-user-circle"></i> Login
           </a>
         </li>

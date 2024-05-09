@@ -112,19 +112,71 @@ class UserDatabase extends Database {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        // ตรวจสอบว่าพบข้อมูลผู้ใช้หรือไม่
+        // ตรวจสอบว่าพบข้อมูลผู้ใช้ที่ตรงกับชื่อผู้ใช้และอีเมลที่ระบุหรือไม่
         if ($user) {
-            // ส่งอีเมลให้ผู้ใช้
-            // โดยในส่วนนี้คุณสามารถเขียนโค้ดส่งอีเมลเพื่อรีเซ็ตรหัสผ่านได้ตามต้องการ
-            // ในที่นี้จะแสดงข้อความเท่านั้นเนื่องจากไม่มีฟังก์ชันจริงสำหรับการส่งอีเมล
-            echo "ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว";
-            return true;
+            // ส่งอีเมลให้ผู้ใช้ (โค้ดส่งอีเมลสามารถเพิ่มต่อไปตามความเหมาะสม)
+            // เปลี่ยนเส้นทาง URL เพื่อไปยังหน้า reset_password.php
+            header("Location: reset_password.php");
+            exit;
         } else {
             // หากไม่พบข้อมูลผู้ใช้ที่ตรงกับชื่อผู้ใช้และอีเมลที่ระบุ
-            // ให้เปลี่ยนเส้นทาง URL เพื่อไปยังหน้า forgot_password.php
             echo "<script>alert('ไม่พบบัญชีผู้ใช้ที่ตรงกับชื่อผู้ใช้และอีเมลที่ระบุ'); window.location.href = 'forgot_password.php';</script>";
         }
     }
+    
+
+    
+
+
+
+    public function changePassword($email, $newPassword) {
+        try {
+            // ค้นหาข้อมูลผู้ใช้จากอีเมลที่ระบุ
+            $query = "SELECT * FROM users WHERE email = :email";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // ตรวจสอบว่าพบข้อมูลผู้ใช้หรือไม่
+            if ($user) {
+                // hash รหัสผ่านใหม่
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    
+                // อัปเดตรหัสผ่านใหม่ในฐานข้อมูล
+                $updateQuery = "UPDATE users SET password = :password WHERE email = :email";
+                $updateStmt = $this->conn->prepare($updateQuery);
+                $updateStmt->bindParam(':password', $hashedPassword);
+                $updateStmt->bindParam(':email', $email);
+                $updateStmt->execute();
+    
+                // ส่งอีเมลหรือแจ้งเตือนว่ารหัสผ่านได้รับการเปลี่ยนแปลง
+                // คุณสามารถเขียนโค้ดส่งอีเมลหรือแจ้งเตือนได้ตามต้องการ
+    
+                return true; // การเปลี่ยนรหัสผ่านสำเร็จ
+            } else {
+                throw new Exception("ไม่พบข้อมูลผู้ใช้ที่เกี่ยวข้องกับอีเมลที่ระบุ");
+            }
+        } catch (PDOException $e) {
+            throw new Exception("เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน: " . $e->getMessage());
+        }
+    }
+
+    public function isUserLoggedIn() {
+        // เริ่ม session หากยังไม่ได้เริ่ม session
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // ตรวจสอบว่ามีคีย์ 'user_id' ใน $_SESSION หรือไม่
+        return isset($_SESSION['user_id']);
+    }
+    
+
+    
+    
+
+    
     
     
     

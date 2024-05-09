@@ -1,0 +1,16 @@
+
+body {
+    background-color: #343a40; /* โทนสีดำ */
+    color: #f8f9fa; /* โทนสีขาว */
+    padding-top: 60px; /* สำหรับ Navbar */
+    padding-bottom: 40px; /* สำหรับ Footer */
+}
+.navbar {
+    background-color: #212529; /* โทนสีดำเข้ม */
+}
+.navbar-brand {
+    color: #f8f9fa !important; /* โทนสีขาว */
+}
+.container {
+    margin-top: 20px;
+}
