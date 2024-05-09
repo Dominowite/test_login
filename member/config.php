@@ -27,7 +27,7 @@ class MemberDatabase extends Database {
 }
 
 
-// สร้างอ็อบเจกต์ของคลาส MemberDatabase เพื่อใช้ในการตรวจสอบสิทธิ์ของผู้ใช้
+
 
 
 ?>

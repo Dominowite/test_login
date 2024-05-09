@@ -58,8 +58,8 @@ class UserDatabase extends Database {
             $logStmt->bindValue(':user_id', $this->conn->lastInsertId());
             $logStmt->execute();
     
-            echo "เพิ่มข้อมูลผู้ใช้ใหม่เรียบร้อยแล้ว";
-            return true;
+            header("Location: index.php");
+            exit;
         } else {
             throw new Exception("เกิดข้อผิดพลาดในการเพิ่มข้อมูลผู้ใช้ใหม่");
         }
