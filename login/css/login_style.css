@@ -1,0 +1,25 @@
+body {
+    background-color: #343a40; /* โทนสีดำ */
+    color: #f8f9fa; /* โทนสีขาว */
+    padding-top: 60px; /* สำหรับ Navbar */
+    padding-bottom: 40px; /* สำหรับ Footer */
+}
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin input[type="text"] {
+    margin-bottom: 10px;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+}

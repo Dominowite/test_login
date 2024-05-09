@@ -1,0 +1,29 @@
+body {
+    background-color: #f8f9fa; /* สีพื้นหลัง */
+    color: #212529; /* สีตัวอักษร */
+    padding-top: 60px; /* สำหรับ Navbar */
+    padding-bottom: 40px; /* สำหรับ Footer */
+}
+.container {
+    max-width: 400px; /* กำหนดความกว้างของฟอร์ม */
+    margin-top: 30px; /* ระยะห่างของฟอร์มด้านบน */
+}
+.form-signup {
+    padding: 20px; /* ระยะห่างของฟอร์มด้านใน */
+    background-color: #fff; /* สีพื้นหลังของฟอร์ม */
+    border-radius: 10px; /* กำหนดขอบโค้งของฟอร์ม */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* เงาของฟอร์ม */
+}
+.form-signup h1 {
+    margin-bottom: 20px; /* ระยะห่างของหัวเรื่อง */
+    text-align: center; /* จัดข้อความตรงกลาง */
+}
+.form-signup .form-floating {
+    margin-bottom: 20px; /* ระยะห่างของฟิลด์ */
+}
+.form-signup label {
+    color: #6c757d; /* สีข้อความฟิลด์ */
+}
+.form-signup button {
+    width: 100%; /* กำหนดความกว้างของปุ่ม */
+}
