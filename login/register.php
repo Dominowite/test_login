@@ -11,9 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password']; // เพิ่มฟิลด์ยืนยันรหัสผ่าน
     
-    // เรียกใช้เมธอด registerUser เพื่อเพิ่มข้อมูลผู้ใช้ใหม่
-    $userDB->registerUser($username, $email, $password);
+    // ตรวจสอบว่ารหัสผ่านและรหัสผ่านยืนยันเหมือนกันหรือไม่
+    if ($password !== $confirmPassword) {
+        echo "<script>alert('รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน');</script>";
+    } else {
+        // เรียกใช้เมธอด registerUser เพื่อเพิ่มข้อมูลผู้ใช้ใหม่
+        $userDB->registerUser($username, $email, $password);
+    }
 }
 ?>
 
@@ -30,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="container">
-    <form class="form-signup" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form class="form-signup" method="POST" action="">
         <h1 class="h3 mb-3 fw-normal">Register</h1>
 
         <div class="form-floating">
@@ -46,6 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-floating">
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             <label for="password">Password</label>
+        </div>
+
+        <!-- เพิ่มฟิลด์ยืนยันรหัสผ่าน -->
+        <div class="form-floating">
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            <label for="confirm_password">Confirm Password</label>
         </div>
 
         <button class="btn btn-lg btn-primary" type="submit">Register</button>
