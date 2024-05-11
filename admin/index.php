@@ -26,12 +26,39 @@ if (!$adminDB->isAdmin()) {
 </head>
 <body>
 
-<?php include 'layout/navbar.php'; ?>
+<?php include 'layout/navbar.php'?>
 
-<div class="container mt-5">
-    <h1>Welcome to the Admin Area</h1>
-    <!-- เพิ่มเนื้อหาหรือรายการที่ต้องการ -->
+<main>
+     <div class="container-fluid">
+<?php include 'layout/sidebar.php'?>
+    <!-- Content Wrapper -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <div class="content">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <h1 class="m-0">Welcome to the Admin Area</h1>
+            </div>
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="container-fluid">
+            <!-- Add your content here -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
 </div>
+<!-- End of Content Wrapper -->
+     </div>
+    
+
+</main>
+
+
+
 
 <!-- เรียกใช้ Bootstrap 5 โดยใช้ JavaScript ผ่าน npm -->
 <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

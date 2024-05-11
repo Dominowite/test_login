@@ -53,17 +53,31 @@ class UserDatabase extends Database {
         // ทำการ execute คำสั่ง SQL
         if ($stmt->execute()) {
             // เพิ่มข้อมูลลงในตาราง user_logs เมื่อมีการลงทะเบียนผู้ใช้ใหม่
+            $userId = $this->conn->lastInsertId(); // รับ user_id ที่เพิ่มล่าสุด
+    
+           $profileQuery = "INSERT INTO profiles (user_id, first_name, last_name, birth_date, address, image) VALUES (:user_id, NULL, NULL, NULL, NULL, :image)";
+$profileStmt = $this->conn->prepare($profileQuery);
+$profileStmt->bindParam(':user_id', $userId);
+$profileStmt->bindParam(':image', $image); // ผูกตัวแปร $image กับพารามิเตอร์ ':image'
+
+$profileStmt->execute();
+
+    
+            // เพิ่มข้อมูลลงในตาราง user_logs เมื่อมีการลงทะเบียนผู้ใช้ใหม่
             $logQuery = "INSERT INTO user_logs (user_id, action, created_at) VALUES (:user_id, 'ลงทะเบียน', NOW())";
             $logStmt = $this->conn->prepare($logQuery);
-            $logStmt->bindValue(':user_id', $this->conn->lastInsertId());
+            $logStmt->bindValue(':user_id', $userId);   
             $logStmt->execute();
     
+            // Redirect ไปยังหน้าเพิ่มข้อมูลเพิ่มเติมในโปรไฟล์
             header("Location: index.php");
             exit;
         } else {
             throw new Exception("เกิดข้อผิดพลาดในการเพิ่มข้อมูลผู้ใช้ใหม่");
         }
     }
+    
+    
 
     public function loginUser($username, $password) {
         // ค้นหาข้อมูลผู้ใช้จากฐานข้อมูลโดยใช้ชื่อผู้ใช้

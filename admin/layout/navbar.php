@@ -10,7 +10,7 @@
           <a class="nav-link" href="#">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Manage Members</a>
+          <a class="nav-link" href="#">จัดการสมาชิก</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Users</a>

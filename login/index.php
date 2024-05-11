@@ -47,10 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <?php if(isset($error_message)): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $error_message; ?>
-            </div>
-        <?php endif; ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo $error_message; ?>
+    </div>
+    <p>If you forgot your password, <a href="forgot_password.php">click here</a> to reset it.</p>
+<?php endif; ?>
 
         <div class="form-floating">
             <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
@@ -64,9 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         
-        <div class="text-center mt-3">
-            <p>If you forgot your password, <a href="forgot_password.php">click here</a> to reset it.</p>
-        </div>
+        
     </form>
 
     <div class="text-center mt-3">

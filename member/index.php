@@ -1,4 +1,5 @@
 <?php
+//index.php
 // เรียกใช้คลาส MemberDatabase จากไฟล์ config.php
 require_once 'config.php';
 
@@ -13,9 +14,6 @@ if (isset($_SESSION['user_id'])) {
     try {
         // เรียกใช้เมธอด checkUserRole เพื่อตรวจสอบสิทธิ์ของผู้ใช้
         $role = $memberDb->checkUserRole($_SESSION['user_id']);
-
-        // หากเป็น admin หรือ member ให้แสดงเนื้อหาหน้านี้
-        // ในที่นี้ไม่ต้องทำอะไรเพิ่มเนื่องจากเป็นหน้า index.php ของสมาชิก
     } catch (Exception $e) {
         // หากเกิดข้อผิดพลาดในการตรวจสอบสิทธิ์ของผู้ใช้
         // ให้แสดงข้อความของข้อผิดพลาด
@@ -49,5 +47,6 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- เรียกใช้ Bootstrap 5 โดยใช้ JavaScript ผ่าน npm -->
 <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/9bf0ae86c0.js" crossorigin="anonymous"></script>
 </body>
 </html>
