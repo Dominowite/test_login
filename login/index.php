@@ -31,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>เข้าสู่ระบบ</title>
     <!-- เรียกใช้ Bootstrap 5 ผ่าน npm -->
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login_style.css">
@@ -44,36 +44,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="container">
     <form class="form-signin" method="POST" action="">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal">กรุณาเข้าสู่ระบบ</h1>
 
         <?php if(isset($error_message)): ?>
     <div class="alert alert-danger" role="alert">
         <?php echo $error_message; ?>
     </div>
-    <p>If you forgot your password, <a href="forgot_password.php">click here</a> to reset it.</p>
+    <p>หากลืมรหัสผ่านของคุณ <a href="views/forgot_password.php">คลิกที่นี่</a> เพื่อรีเซ็ต</p>
 <?php endif; ?>
 
         <div class="form-floating">
-            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อผู้ใช้" required>
+            <label for="username">ชื่อผู้ใช้</label>
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" required>
+            <label for="password">รหัสผ่าน</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">เข้าสู่ระบบ</button>
         
         
     </form>
 
     <div class="text-center mt-3">
-        <p>Don't have an account? <a href="register.php">Register</a></p>
+        <p>ยังไม่มีบัญชีผู้ใช้? <a href="views/register.php">ลงทะเบียน</a></p>
     </div>
 
     <div class="text-center mt-3">
-        <p>Back to <a href="../index.php">Home</a></p>
+        <p>กลับไปยัง <a href="../index.php">หน้าหลัก</a></p>
     </div>
 </div>
 

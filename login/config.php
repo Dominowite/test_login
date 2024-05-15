@@ -70,7 +70,7 @@ $profileStmt->execute();
             $logStmt->execute();
     
             // Redirect ไปยังหน้าเพิ่มข้อมูลเพิ่มเติมในโปรไฟล์
-            header("Location: index.php");
+            header("Location: ../index.php");
             exit;
         } else {
             throw new Exception("เกิดข้อผิดพลาดในการเพิ่มข้อมูลผู้ใช้ใหม่");
@@ -116,27 +116,28 @@ $profileStmt->execute();
         }
     }
 
-
     public function forgotPassword($username, $email) {
-        // ค้นหาข้อมูลผู้ใช้จากฐานข้อมูลโดยใช้ชื่อผู้ใช้และอีเมล
-        $query = "SELECT * FROM users WHERE username = :username AND email = :email";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            $query = "SELECT * FROM users WHERE username = :username AND email = :email";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        // ตรวจสอบว่าพบข้อมูลผู้ใช้ที่ตรงกับชื่อผู้ใช้และอีเมลที่ระบุหรือไม่
-        if ($user) {
-            // ส่งอีเมลให้ผู้ใช้ (โค้ดส่งอีเมลสามารถเพิ่มต่อไปตามความเหมาะสม)
-            // เปลี่ยนเส้นทาง URL เพื่อไปยังหน้า reset_password.php
-            header("Location: reset_password.php");
-            exit;
-        } else {
-            // หากไม่พบข้อมูลผู้ใช้ที่ตรงกับชื่อผู้ใช้และอีเมลที่ระบุ
-            echo "<script>alert('ไม่พบบัญชีผู้ใช้ที่ตรงกับชื่อผู้ใช้และอีเมลที่ระบุ'); window.location.href = 'forgot_password.php';</script>";
+            if ($user) {
+                // ส่งผลลัพธ์กลับไปยัง controller เพื่อแจ้งว่าพบผู้ใช้แล้ว
+                return true;
+            } else {
+                // ส่งผลลัพธ์กลับไปยัง controller เพื่อแจ้งว่าไม่พบผู้ใช้
+                return false;
+            }
+        } catch (PDOException $e) {
+            // ส่งผลลัพธ์กลับไปยัง controller เพื่อแจ้งข้อผิดพลาดในการค้นหา
+            throw new Exception("Error: " . $e->getMessage());
         }
     }
+    
     
 
     
@@ -166,7 +167,7 @@ $profileStmt->execute();
     
                 // ส่งอีเมลหรือแจ้งเตือนว่ารหัสผ่านได้รับการเปลี่ยนแปลง
                 // คุณสามารถเขียนโค้ดส่งอีเมลหรือแจ้งเตือนได้ตามต้องการ
-    
+                header("Location: ../index.php");
                 return true; // การเปลี่ยนรหัสผ่านสำเร็จ
             } else {
                 throw new Exception("ไม่พบข้อมูลผู้ใช้ที่เกี่ยวข้องกับอีเมลที่ระบุ");
